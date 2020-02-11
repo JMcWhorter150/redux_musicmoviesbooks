@@ -152,6 +152,7 @@ function bookManager(state=bookState, action) {
             break;
         case UPDATE_BOOK:
             newState[action.id] = action.payload;
+            break;
         default:
             break;
     }
@@ -171,6 +172,7 @@ function musicManager(state=musicState, action) {
             break;
         case UPDATE_MUSIC:
             newState[action.id] = action.payload;
+            break;
         default:
             break;
     }
@@ -190,6 +192,7 @@ function movieManager(state=movieState, action) {
             break;
         case UPDATE_MOVIE:
             newState[action.id] = action.payload;
+            break;
         default:
             break;
     }
