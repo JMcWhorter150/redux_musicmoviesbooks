@@ -141,7 +141,7 @@ const movieState = [{
 // reducers
 
 function bookManager(state=bookState, action) {
-    newState = [...state];
+    const newState = [...state];
 
     switch (action.type) {
         case ADD_BOOK:
@@ -160,7 +160,7 @@ function bookManager(state=bookState, action) {
 }
 
 function musicManager(state=musicState, action) {
-    newState = [...state];
+    const newState = [...state];
 
     switch (action.type) {
         case ADD_MUSIC:
@@ -179,7 +179,7 @@ function musicManager(state=musicState, action) {
 }
 
 function movieManager(state=movieState, action) {
-    newState = [...state];
+    const newState = [...state];
 
     switch (action.type) {
         case ADD_MOVIE:
@@ -216,3 +216,19 @@ store.subscribe(() => {
 })
 
 // add dispatches
+
+store.dispatch(addBook('Rent', 'Chuck Pahluniuk', 280));
+store.dispatch(removeBook(0));
+store.dispatch(updateBook(0, "Rent", "Chuck Palahniuk", 281));
+
+store.dispatch(addMusic('Ok Computer', 'Radiohead', 14));
+store.dispatch(addMusic('Reptilians', 'STRFKR', 11));
+store.dispatch(removeMusic(1));
+store.dispatch(updateMusic(1, 'Reptilians', 'STRFKR', 12));
+
+store.dispatch(addMovie('A League of Their Own', 1994, 'drama'));
+store.dispatch(addMovie('Fight Club', 1999, 'drama'));
+store.dispatch(updateMovie(2, "Fight Club", 1999, 'Action'));
+store.dispatch(removeMovie(0));
+store.dispatch(removeMovie(0));
+store.dispatch(removeMovie(10));
