@@ -25,6 +25,98 @@ const UPDATE_BOOK = "UPDATE_BOOK";
 const UPDATE_MUSIC = "UPDATE_MUSIC";
 const UPDATE_MOVIE = "UPDATE_MOVIE";
 
+// action helpers
+
+function addBook(title, author, pageCount){
+    return {
+        type: ADD_BOOK,
+        payload: {
+            title,
+            author,
+            pageCount
+        }
+    }
+}
+
+function addMusic(title, artist, trackCount ){
+    return {
+        type: ADD_MUSIC,
+        payload: {
+            title,
+            artist,
+            trackCount
+        }
+    }
+}
+
+function addMovie(title, yearReleased, genre){
+    return {
+        type: ADD_MOVIE,
+        payload: {
+            title,
+            yearReleased,
+            genre
+        }
+    }
+}
+
+function removeBook(id) {
+    return {
+        type: REM_BOOK,
+        id
+    }
+}
+
+function removeMusic(id) {
+    return {
+        type: REM_MUSIC,
+        id
+    }
+}
+
+function removeMovie(id) {
+    return {
+        type: REM_MOVIE,
+        id
+    }
+}
+
+function updateBook(id, title, author, pageCount) {
+    return {
+        type: UPDATE_BOOK,
+        id,
+        payload: {
+            title,
+            author,
+            pageCount
+        }
+    }
+}
+
+function updateMusic(id, title, author, pageCount) {
+    return {
+        type: UPDATE_MUSIC,
+        id,
+        payload: {
+            title,
+            author,
+            pageCount
+        }
+    }
+}
+
+function updateMovie(id, title, yearReleased, genre) {
+    return {
+        type: UPDATE_MOVIE,
+        id,
+        payload: {
+            title,
+            yearReleased,
+            genre
+        }
+    }
+}
+
 // basic states
 
 const bookState = [{
@@ -34,9 +126,9 @@ const bookState = [{
 }]
 
 const musicState = [{
-    title: "Brother",
+    title: "Red of Tooth and Claw",
     artist: "Murder by Death",
-    songLength: 190
+    trackCount: 12
 }
 ];
 
@@ -86,7 +178,7 @@ function musicManager(state=musicState, action) {
     return newState;
 }
 
-function bookManager(state=movieState, action) {
+function movieManager(state=movieState, action) {
     newState = [...state];
 
     switch (action.type) {
@@ -106,8 +198,21 @@ function bookManager(state=movieState, action) {
 
 // combine reducers
 
+const rootReducer = combineReducers({
+    book: bookManager,
+    music: musicManager,
+    movie: movieManager
+});
+
 // create store
 
+const store = createStore(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+window.store = store;
+
 // add debugging and console logging to store
+
+store.subscribe(() => {
+    console.table(store.getState());
+})
 
 // add dispatches
